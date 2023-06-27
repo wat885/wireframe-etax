@@ -19,7 +19,7 @@ import { classNames } from "primereact/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { ProductService } from "../../demo/service/ProductService";
 import { Demo } from "../../types/types";
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import { Calendar, CalendarChangeEvent } from "primereact/calendar";
 
 const Crud = () => {
   let emptyProduct: Demo.Product = {
@@ -47,9 +47,11 @@ const Crud = () => {
 
   //Form state
   const [date, setDate] = useState<string | Date | Date[] | null>(null);
-  const [untilDate, setUntilDate] = useState<string | Date | Date[] | null>(null);
+  const [untilDate, setUntilDate] = useState<string | Date | Date[] | null>(
+    null
+  );
 
-  console.log("date", date , typeof date);
+  console.log("date", date, typeof date);
 
   useEffect(() => {
     ProductService.getProducts().then((data) => setProducts(data));
@@ -433,8 +435,10 @@ const Crud = () => {
                     วันที่ของเอกสาร เริ่มต้น-สิ้นสุด (Date)
                   </label>
                   <Calendar
-                    value={date}
-                    onChange={(e : CalendarChangeEvent) => setDate(e.value)}
+                    value={date || null}
+                    onChange={(e: CalendarChangeEvent) =>
+                      e.value !== undefined && setDate(e.value)
+                    }
                     showIcon
                     dateFormat="dd/mm/yy"
                     showButtonBar
@@ -445,14 +449,16 @@ const Crud = () => {
                     เลขประจำตัวผู้เสียภาษี (Tax ID)
                   </label>
                   <Calendar
-                    value={untilDate}
-                    onChange={(e : CalendarChangeEvent) => setUntilDate(e.value)}
+                    value={date || null}
+                    onChange={(e: CalendarChangeEvent) =>
+                      e.value !== undefined && setUntilDate(e.value)
+                    }
                     showIcon
                     dateFormat="dd/mm/yy"
                     showButtonBar
                   />
                 </div>
-{/* 
+                {/* 
                 <input
                   type="date"
                   id="start"
@@ -462,8 +468,6 @@ const Crud = () => {
                   // max="2018-12-31"
                   onChange={(e) => console.log(e.target.value)}
                 ></input> */}
-
-
               </div>
             </div>
           </div>
