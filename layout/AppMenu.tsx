@@ -9,15 +9,33 @@ import { AppMenuItem } from "../types/types";
 
 const AppMenu = () => {
   const { layoutConfig } = useContext(LayoutContext);
-
+  
   const model: AppMenuItem[] = [
     {
-      label: "Home",
+      label: "Operation Zone",
+      items: [
+        { label: "Dashboard", icon: "pi pi-fw pi-home", to: "/operator/dashboard" },
+        { label: "Batch Tracking", icon: "pi pi-fw pi-file-o", to: "/operator/track_import" },
+        { label: "Instant Tracking", icon: "pi pi-fw pi-file-o", to: "/operator/instant_tracking" },
+        { label: "Printing Submit", icon: "pi pi-print", to: "/operator/printing_submit" },
+
+      ],
+    },
+    {
+      label: "User Zone",
       items: [
         { label: "Dashboard", icon: "pi pi-fw pi-home", to: "/" },
         { label: "E-TAX Invoice", icon: "pi pi-fw pi-file-o", to: "/etaxdocument" },
+        { label: "E-TAX Invoice (เก่า)", icon: "pi pi-fw pi-file-o", to: "/etaxdocument2" },
+        { label: "Sales Tax Report", icon: "pi pi-fw pi-file-o", to: "/salestaxreport" },
+        { label: "Deb./Cre. Note", icon: "pi pi-fw pi-file-o", to: "/dcnote" },
+        // { label: "Operation Zone", icon: "pi pi-user", to: "/dcnote" },
+        // { label: "My Profile", icon: "pi pi-user", to: "/profile" },
+        // { label: "Logout", icon: "pi pi-power-off", to: "/Logout" },
       ],
     },
+
+
 
     // {
     //   label: "UI Components",
@@ -224,6 +242,8 @@ const AppMenu = () => {
             <li className="menu-separator"></li>
           );
         })}
+
+        
 
         {/* <Link
           href="https://blocks.primereact.org"

@@ -17,43 +17,32 @@ import { Toast } from "primereact/toast";
 import { Toolbar } from "primereact/toolbar";
 import { classNames } from "primereact/utils";
 import React, { useEffect, useRef, useState } from "react";
-import { ProductService } from "../../demo/service/ProductService";
-import { Demo } from "../../types/types";
-import {  Etaxdocument,SelectedDates } from "../../types/etaxTypes";
-import { etaxDocumentMockupData } from "../../types/mockupEtaxData";
+import { ProductService } from "../../../demo/service/ProductService";
+import { Demo } from "../../../types/types";
+import { TrackImport } from "../../../types/etaxTypes";
+import { trackImportMockupData } from "../../../types/mockupEtaxData";
 import { Calendar, CalendarChangeEvent } from "primereact/calendar";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 
 const Crud = () => {
-  let emptyProduct: Etaxdocument = {
-    // id: "",
-    // name: "",
-    // image: "",
-    // description: "",
-    // category: "",
-    // price: 0,
-    // quantity: 0,
-    // rating: 0,
-    // inventoryStatus: "INSTOCK",
+  let emptyProduct: TrackImport = {
   };
 
-  const [products, setProducts] = useState<Etaxdocument[]>([]);
+  const [products, setProducts] = useState<TrackImport[]>([]);
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
   const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
-  const [product, setProduct] = useState<Etaxdocument>(emptyProduct);
-  const [selectedProducts, setSelectedProducts] = useState<Etaxdocument[]>([]);
+  const [product, setProduct] = useState<TrackImport>(emptyProduct);
+  const [selectedProducts, setSelectedProducts] = useState<TrackImport[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState("");
   const toast = useRef<Toast>(null);
-  const dt = useRef<DataTable<Etaxdocument[]>>(null);
+  const dt = useRef<DataTable<TrackImport[]>>(null);
 
   //Form state
 
-  const [taxInvoice, setTaxInvoice] = useState<string>("");
-  const [billingAccount, setBillingAccount] = useState<string>("");
-  const [invoiceNumber, setInvoiceNumber] = useState<string>("");
-  const [taxID, setTaxId] = useState<string>("");
+  const [orignalFile, setOrignalFile] = useState<string>("");
+  const [findId, setFindId] = useState<string>("");
+  const [fileDescrition, setFileDescrition] = useState<string>("");
   const [sendEmail, setSendEmail] = useState<string>("");
 
   const [date, setDate] = useState<string | Date | Date[] | null>(null);
@@ -61,22 +50,12 @@ const Crud = () => {
     null
   );
 
-  const [selectedDate, setSelectedDate] = useState<SelectedDates | null>({
-    name: "เลือกทั้งเดือน",
-    code: "month",
-  });
-  const dates: SelectedDates[] = [
-    { name: "เลือกวันเดียว ", code: "Date" },
-    { name: "เลือกทั้งเดือน", code: "month" },
-  ];
-
   // console.log("date", date, typeof date);
   // console.log('products',products)
 
-
   useEffect(() => {
     // ProductService.getProducts().then((data) => setProducts(data));
-    setProducts([...etaxDocumentMockupData]);
+    setProducts([...trackImportMockupData]);
   }, []);
 
   const formatCurrency = (value: number) => {
@@ -134,17 +113,17 @@ const Crud = () => {
     //   }
 
     //   setProducts(_products);
-      setProductDialog(false);
+    setProductDialog(false);
     //   setProduct(emptyProduct);
     // }
   };
 
-  const editProduct = (product: Etaxdocument) => {
+  const editProduct = (product: TrackImport) => {
     setProduct({ ...product });
     setProductDialog(true);
   };
 
-  const confirmDeleteProduct = (product: Etaxdocument) => {
+  const confirmDeleteProduct = (product: TrackImport) => {
     setProduct(product);
     setDeleteProductDialog(true);
   };
@@ -170,7 +149,6 @@ const Crud = () => {
     //     break;
     //   }
     // }
-
     // return index;
   };
 
@@ -218,7 +196,6 @@ const Crud = () => {
     // const val = (e.target && e.target.value) || "";
     // let _product = { ...product };
     // _product[`${name}`] = val;
-
     // setProduct(_product);
   };
 
@@ -229,7 +206,6 @@ const Crud = () => {
     // const val = e.value || 0;
     // let _product = { ...product };
     // _product[`${name}`] = val;
-
     // setProduct(_product);
   };
 
@@ -276,98 +252,81 @@ const Crud = () => {
     );
   };
 
-  const invoiceIdTemplate = (rowData: Etaxdocument) => {
+  const findIdTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Code</span>
-        {rowData.invoiceId}
+        {rowData.findId}
       </>
     );
   };
-  const documentNumberTemplate = (rowData: Etaxdocument) => {
+  const orignalFileTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Code</span>
-        {rowData.documentNumber}
-      </>
-    );
-  };
-
-  const businessNumberTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.businessNumber}
-      </>
-    );
-  };
-  const invoiceNumberTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.invoiceNumber}
-      </>
-    );
-  };
-  const dateTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.date}
-      </>
-    );
-  };
-  const nameTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.name}
-      </>
-    );
-  };
-  const taxInvoiceTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.taxInvoice}
-      </>
-    );
-  };
-  const amountTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.amount}
-      </>
-    );
-  };
-  const vatTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.vat}
-      </>
-    );
-  };
-  const totalTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.total}
-      </>
-    );
-  };
-  const emailTemplate = (rowData: Etaxdocument) => {
-    return (
-      <>
-        <span className="p-column-title">Code</span>
-        {rowData.email}
+        {rowData.orignalFile}
       </>
     );
   };
 
+  const importDateTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.importDate}
+      </>
+    );
+  };
+  const totalDocTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.totalDoc}
+      </>
+    );
+  };
+  const errorDocTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.errorDoc}
+      </>
+    );
+  };
+  const inprogressDocTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.inprogressDoc}
+      </>
+    );
+  };
+  const doneDocTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.doneDoc}
+      </>
+    );
+  };
+  const importStateTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.importState}
+      </>
+    );
+  };
+  const errorDescriptionTemplate = (rowData: TrackImport) => {
+    return (
+      <>
+        <span className="p-column-title">Code</span>
+        {rowData.errorDescription}
+      </>
+    );
+  };
 
-  const codeBodyTemplate = (rowData: Etaxdocument) => {
+  const codeBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Code</span>
@@ -376,7 +335,7 @@ const Crud = () => {
     );
   };
 
-  const nameBodyTemplate = (rowData: Etaxdocument) => {
+  const nameBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Name</span>
@@ -385,7 +344,7 @@ const Crud = () => {
     );
   };
 
-  const imageBodyTemplate = (rowData: Etaxdocument) => {
+  const imageBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         {/* <span className="p-column-title">Image</span>
@@ -399,7 +358,7 @@ const Crud = () => {
     );
   };
 
-  const priceBodyTemplate = (rowData: Etaxdocument) => {
+  const priceBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Price</span>
@@ -408,7 +367,7 @@ const Crud = () => {
     );
   };
 
-  const categoryBodyTemplate = (rowData: Etaxdocument) => {
+  const categoryBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Category</span>
@@ -417,7 +376,7 @@ const Crud = () => {
     );
   };
 
-  const ratingBodyTemplate = (rowData: Etaxdocument) => {
+  const ratingBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Reviews</span>
@@ -426,7 +385,7 @@ const Crud = () => {
     );
   };
 
-  const statusBodyTemplate = (rowData: Etaxdocument) => {
+  const statusBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <span className="p-column-title">Status</span>
@@ -439,7 +398,7 @@ const Crud = () => {
     );
   };
 
-  const actionBodyTemplate = (rowData: Etaxdocument) => {
+  const actionBodyTemplate = (rowData: TrackImport) => {
     return (
       <>
         <Button
@@ -511,13 +470,11 @@ const Crud = () => {
     event.preventDefault();
     console.log("Form submitted");
     console.log({
-      taxInvoice,
-      billingAccount,
-      invoiceNumber,
-      taxID,
+      orignalFile,
+      findId,
+      fileDescrition,
       date,
       untilDate,
-      selectedDate,
     });
   };
 
@@ -532,66 +489,47 @@ const Crud = () => {
             <div
             // className="card"
             >
-              <h5>ค้นหาใบเสร็จรับเงิน/ใบกำกับภาษี</h5>
+              <h5>Import File Search Filter</h5>
               <form onSubmit={handleSubmit}>
                 <div className="p-fluid formgrid grid">
-                <div className="field col-12 md:col-3  sm:col-6">
-                    <label htmlFor="tax-invoice">
-                      เลขที่ใบเสร็จรับเงิน/ใบกำกับภาษี
-                    </label>
+                  <div className="field col-12 md:col-4  sm:col-6">
+                    <label htmlFor="tax-invoice">Original file name</label>
                     <InputText
                       id="tax-invoice"
                       type="text"
-                      value={taxInvoice}
+                      value={orignalFile}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setTaxInvoice(e.target.value)
+                        setOrignalFile(e.target.value)
                       }
                     />
                   </div>
 
-                  <div className="field col-12 md:col-3  sm:col-6">
-                    <label htmlFor="billing-account">
-                      เลขที่ลูกค้า (Billing Account)
-                    </label>
+                  <div className="field col-12 md:col-4  sm:col-6">
+                    <label htmlFor="billing-account">Import ID/File ID </label>
                     <InputText
                       id="billing-account"
                       type="text"
-                      value={billingAccount}
+                      value={findId}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setBillingAccount(e.target.value)
+                        setFindId(e.target.value)
                       }
                     />
                   </div>
-                  <div className="field col-12 md:col-3  sm:col-6">
-                    <label htmlFor="invoice-number">
-                      เลขที่ใบแจ้งหนี้ (Invoice Number)
-                    </label>
+                  <div className="field col-12 md:col-4  sm:col-6">
+                    <label htmlFor="invoice-number">File descrition</label>
                     <InputText
                       id="invoice-number"
                       type="text"
-                      value={invoiceNumber}
+                      value={fileDescrition}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setInvoiceNumber(e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="field col-12 md:col-3  sm:col-6">
-                    <label htmlFor="tax-id">
-                      เลขประจำตัวผู้เสียภาษี (Tax ID)
-                    </label>
-                    <InputText
-                      id="tax-id"
-                      type="text"
-                      value={taxID}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setTaxId(e.target.value)
+                        setFileDescrition(e.target.value)
                       }
                     />
                   </div>
 
-                  <div className="field col-12 md:col-3  sm:col-6">
+                  <div className="field col-12 md:col-4  sm:col-6">
                     <label htmlFor="tax-id">
-                      วันที่ของเอกสาร เริ่มต้น-สิ้นสุด (Date)
+                    Import date from	
                     </label>
                     <Calendar
                       value={date || null}
@@ -603,9 +541,9 @@ const Crud = () => {
                       showButtonBar
                     />
                   </div>
-                  <div className="field col-12 md:col-3  sm:col-6">
+                  <div className="field col-12 md:col-4  sm:col-6">
                     <label htmlFor="tax-id">
-                      เลขประจำตัวผู้เสียภาษี (Tax ID)
+                    and until
                     </label>
                     <Calendar
                       value={untilDate || null}
@@ -618,20 +556,7 @@ const Crud = () => {
                     />
                   </div>
 
-                  <div className="field col-12 md:col-3  sm:col-6">
-                    <label htmlFor="select-date">เลือกวัน</label>
-                    <Dropdown
-                      value={selectedDate}
-                      onChange={(e: DropdownChangeEvent) =>
-                        setSelectedDate(e.value)
-                      }
-                      options={dates}
-                      optionLabel="name"
-                      placeholder="Select a Date"
-                      // className="w-full md:w-14rem"
-                    />
-                  </div>
-                  <div className="field col-12 md:col-3  sm:col-6">
+                  <div className="field col-12 md:col-4  sm:col-6">
                     <label htmlFor="search">ค้นหา</label>
                     <Button label="Search" type="submit" className=""></Button>
                   </div>
@@ -645,7 +570,7 @@ const Crud = () => {
             value={products}
             selection={selectedProducts}
             onSelectionChange={(e) =>
-              setSelectedProducts(e.value as Etaxdocument[])
+              setSelectedProducts(e.value as TrackImport[])
             }
             dataKey="id"
             paginator
@@ -664,117 +589,67 @@ const Crud = () => {
               headerStyle={{ width: "4rem" }}
             ></Column> */}
             <Column
-              field="invoiceId"
-              header="ลำดับ"
-              body={invoiceIdTemplate}
+              field="findId"
+              header="Import ID/File ID"
+              body={findIdTemplate}
+              headerStyle={{ minWidth: "10rem" }}
+            ></Column>
+
+            <Column
+              field="orignalFile"
+              header="Orignal File Name"
+              body={orignalFileTemplate}
+              headerStyle={{ minWidth: "15rem" }}
+            ></Column>
+
+            <Column
+              field="importDate"
+              header="Imported Date"
+              body={importDateTemplate}
+              headerStyle={{ minWidth: "12rem" }}
+            ></Column>
+
+            <Column
+              field="totalDoc"
+              header="Total"
+              body={totalDocTemplate}
               headerStyle={{ minWidth: "3rem" }}
             ></Column>
 
             <Column
-              field="documentNumber"
-              header="เลขที่เอกสาร"
-              body={documentNumberTemplate}
-              headerStyle={{ minWidth: "5rem" }}
+              field="errorDoc"
+              header="Error"
+              body={errorDocTemplate}
+              headerStyle={{ minWidth: "3rem" }}
             ></Column>
 
             <Column
-              field="businessNumber"
-              header="เลขที่ลูกค้า (BA)"
-              body={businessNumberTemplate}
-              headerStyle={{ minWidth: "10rem" }}
+              field="inprogressDoc"
+              header="Inprogress"
+              body={inprogressDocTemplate}
+              headerStyle={{ minWidth: "3rem" }}
             ></Column>
 
             <Column
-              field="invoiceNumber"
-              header="เลขที่ใบแจ้งหนี้"
-              body={invoiceNumberTemplate}
-              headerStyle={{ minWidth: "10rem" }}
+              field="doneDoc"
+              header="Done"
+              body={doneDocTemplate}
+              headerStyle={{ minWidth: "3rem" }}
             ></Column>
 
-            <Column
-              field="date"
-              header="วันที่ของเอกสาร"
-              body={dateTemplate}
-              headerStyle={{ minWidth: "10rem" }}
-            ></Column>
-
-            <Column
-              field="name"
-              header="ชื่อลูกค้า"
-              body={nameTemplate}
-              headerStyle={{ minWidth: "13rem" }}
-            ></Column>
-
-            <Column
-              field="taxInvoice"
-              header="เลขที่ผู้เสียภาษี"
-              body={taxInvoiceTemplate}
-              headerStyle={{ minWidth: "5rem" }}
-            ></Column>
             <Column
               field="amount"
-              header="จำนวนเงิน"
-              body={amountTemplate}
-              headerStyle={{ minWidth: "5rem" }}
-            ></Column>
-            <Column
-              field="vat"
-              header="VAT"
-              body={vatTemplate}
+              header="Import State"
+              body={importStateTemplate}
               headerStyle={{ minWidth: "3rem" }}
             ></Column>
-            <Column
-              field="total"
-              header="รวมเงินที่ชำระ"
-              body={totalTemplate}
-              headerStyle={{ minWidth: "5rem" }}
-            ></Column>
-            <Column
-              field="email"
-              header="E-mai"
-              body={emailTemplate}
-              headerStyle={{ minWidth: "5rem" }}
-            ></Column>
-
-
-            
 
             <Column
-              body={actionBodyTemplate}
+              field="errorDescription"
+              header="Error Description"
+              body={errorDescriptionTemplate}
               headerStyle={{ minWidth: "10rem" }}
             ></Column>
-
-            {/* <Column header="Image" body={imageBodyTemplate}></Column>
-            <Column
-              field="price"
-              header="Price"
-              body={priceBodyTemplate}
-              sortable
-            ></Column>
-            <Column
-              field="category"
-              header="Category"
-              sortable
-              body={categoryBodyTemplate}
-              headerStyle={{ minWidth: "10rem" }}
-            ></Column>
-            <Column
-              field="rating"
-              header="Reviews"
-              body={ratingBodyTemplate}
-              sortable
-            ></Column>
-            <Column
-              field="inventoryStatus"
-              header="Status"
-              body={statusBodyTemplate}
-              sortable
-              headerStyle={{ minWidth: "10rem" }}
-            ></Column>
-            <Column
-              body={actionBodyTemplate}
-              headerStyle={{ minWidth: "10rem" }}
-            ></Column> */}
           </DataTable>
 
           <Dialog
@@ -810,7 +685,7 @@ const Crud = () => {
                 <small className="p-invalid">Email is required.</small>
               )}
             </div>
-{/*             
+            {/*             
             <div className="field">
               <label htmlFor="description">Description</label>
               <InputTextarea
@@ -907,7 +782,7 @@ const Crud = () => {
               />
               {product && (
                 <span>
-                  Are you sure you want to delete <b>{product.name}</b>?
+                  Are you sure you want to delete <b>{product.findId}</b>?
                 </span>
               )}
             </div>
