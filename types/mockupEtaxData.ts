@@ -12,6 +12,73 @@ export const userDashboardMockupData = [
   },
 ];
 
+// user/salestaxreport
+
+export const salestaxreportMockupData = [
+  {
+    "invoiceId": 1,
+    "invoice_number": "AP230795875",
+    "date": "26 มิ.ย. 2566",
+    "customer_name": "น.ส. อิสยาภรณ์ พิมพ์แสง",
+    "taxid": "1409900727091",
+    "branch_id": "00000",
+    "tax_basis_amount": 700,
+    "tax_total_amount": 49,
+    "grand_total_amount": 749,
+    "description": ""
+  },
+  {
+    "invoiceId": 2,
+    "invoice_number": "AP230795876",
+    "date": "26 มิ.ย. 2566",
+    "customer_name": "นาย สมชาย ทดสอบ",
+    "taxid": "1409900727092",
+    "branch_id": "00001",
+    "tax_basis_amount": 800,
+    "tax_total_amount": 56,
+    "grand_total_amount": 856,
+    "description": ""
+  },
+  {
+    "invoiceId": 3,
+    "invoice_number": "AP230795877",
+    "date": "26 มิ.ย. 2566",
+    "customer_name": "นาง รัตนาภรณ์ สุขสวัสดิ์",
+    "taxid": "1409900727093",
+    "branch_id": "00002",
+    "tax_basis_amount": 900,
+    "tax_total_amount": 63,
+    "grand_total_amount": 963,
+    "description": ""
+  },
+  {
+    "invoiceId": 4,
+    "invoice_number": "AP230795878",
+    "date": "26 มิ.ย. 2566",
+    "customer_name": "นางสาว จิราวรรณ รักเพ็ญ",
+    "taxid": "1409900727094",
+    "branch_id": "00003",
+    "tax_basis_amount": 1000,
+    "tax_total_amount": 70,
+    "grand_total_amount": 1070,
+    "description": ""
+  },
+  {
+    "invoiceId": 5,
+    "invoice_number": "AP230795879",
+    "date": "26 มิ.ย. 2566",
+    "customer_name": "นาย วิชัย สุขสวัสดิ์",
+    "taxid": "1409900727095",
+    "branch_id": "00004",
+    "tax_basis_amount": 1100,
+    "tax_total_amount": 77,
+    "grand_total_amount": 1177,
+    "description": ""
+  }
+];
+
+
+
 //operator/dashboard
 export const operatorDashboardMockupData = [
   {
@@ -145,6 +212,53 @@ export const trackImportMockupData  = [
     errorDescription: "",
   },
 ];
+
+//operator/printing_submit
+
+export const printingSubmitMockupData = [
+  {
+    "reference": "20230627-9F7AF16D2F1B6394",
+    "group": "PRD-TIV-INSTANT",
+    "filename": "IBC_COUNT_20230627_001.pdf",
+    "filesize": "688483627",
+    "sequence": "1-10000",
+    "total": 10000,
+    "createdDate": "2023-06-27 14:58:15",
+    "description": "eTax Invoice of 27 Jun 2023 (counter bank)"
+  },
+  {
+    "reference": "20230703-2B4F6A8D3C7E5F9A",
+    "group": "PRD-TIV-INSTANT",
+    "filename": "IBC_COUNT_20230703_002.pdf",
+    "filesize": "692837411",
+    "sequence": "10001-20000",
+    "total": 10000,
+    "createdDate": "2023-07-03 17:12:30",
+    "description": "eTax Invoice of 03 Jul 2023 (counter bank)"
+  },
+  {
+    "reference": "20230705-7D9E2C3F6B8A4A1C",
+    "group": "PRD-TIV-INSTANT",
+    "filename": "IBC_COUNT_20230705_002.pdf",
+    "filesize": "697294925",
+    "sequence": "20001-30000",
+    "total": 10000,
+    "createdDate": "2023-07-05 11:40:55",
+    "description": "eTax Invoice of 05 Jul 2023 (counter bank)"
+  },
+  {
+    "reference": "20230706-5A8B1D2F9C3E7B4E",
+    "group": "PRD-TIV-INSTANT",
+    "filename": "IBC_COUNT_20230706_002.pdf",
+    "filesize": "701756822",
+    "sequence": "30001-40000",
+    "total": 10000,
+    "createdDate": "2023-07-06 09:27:20",
+    "description": "eTax Invoice of 06 Jul 2023 (counter bank)"
+  }
+];
+
+
 
 //operator/instant_tracking
 

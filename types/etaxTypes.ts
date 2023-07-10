@@ -26,7 +26,21 @@ export interface SelectedDates {
   code: string;
 }
 
-//
+// Salestaxreport
+
+export interface Salestaxreport {
+  invoiceId?: number;
+  invoice_number?: string;
+  date?: string;
+  customer_name?: string;
+  taxid?: string;
+  branch_id?: string;
+  tax_basis_amount?: number;
+  tax_total_amount?: number;
+  grand_total_amount?: number;
+  description?: string;
+}
+
 
 // OPERATORS ZONE
 //operator/dashboard
@@ -39,6 +53,18 @@ export interface OperatorDashboard {
   isDown?:     number;
 }
 
+//operator/track_import
+
+export interface PrintingSubmit {
+  reference: string;
+  group: string;
+  filename: string;
+  filesize: string;
+  sequence: string;
+  total: number;
+  createdDate: string;
+  description: string;
+}
 //operator/track_import
 
 export interface TrackImport {

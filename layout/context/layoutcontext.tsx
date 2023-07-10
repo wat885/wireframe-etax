@@ -9,8 +9,12 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         menuMode: 'static',
         colorScheme: 'light',
         theme: 'lara-light-indigo',
-        scale: 14
+        scale: 12
     });
+
+    const [iconDarkLight, setIconDarkLight] = useState<String>("Light");
+
+    const [selectOrder, setSelectOrder] = useState([])
 
     const [layoutState, setLayoutState] = useState<LayoutState>({
         staticMenuDesktopInactive: false,
@@ -51,7 +55,13 @@ export const LayoutProvider = ({ children }: ChildContainerProps) => {
         layoutState,
         setLayoutState,
         onMenuToggle,
-        showProfileSidebar
+        showProfileSidebar,
+        iconDarkLight,
+        setIconDarkLight,
+        selectOrder, 
+        setSelectOrder
+
+        
     };
 
     return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;

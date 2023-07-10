@@ -50,6 +50,12 @@ export interface LayoutContextProps {
     setLayoutState: Dispatch<SetStateAction<LayoutState>>;
     onMenuToggle: () => void;
     showProfileSidebar: () => void;
+    setIconDarkLight?: any
+    iconDarkLight?: String;
+    // setIconDarkLight?: Dispatch<SetStateAction<String>>;
+    // iconDarkLight?: String;
+    selectOrder?:any,
+    setSelectOrder? :any
 }
 
 export interface MenuContextProps {

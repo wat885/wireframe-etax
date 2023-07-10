@@ -26,19 +26,16 @@ const LoginPage: Page = () => {
     <div className={containerClassName}>
       <div className="flex flex-column align-items-center justify-content-center">
         {/* <img src={`/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`} alt="Sakai logo" className="mb-5 w-6rem flex-shrink-0" /> */}
-        <img
-          src={`/layout/images/04_NT-Logo-with-Full-Name (1).png`}
-          alt="NT logo"
-          height="100"
-        />
-        <br/>
 
-        {/* <img
-          alt="Prime Blocks"
-          className="w-full mt-3"
-          src={`/layout/images/banner-primeblocks.png`}
-        /> */}
-        {/* <img src="http://101.109.250.52/NT-Logo/04_NT-Logo-with-Full-Name.png" alt="NT logo"  height="100" /> */}
+        <div className="w-full  py-4 px-5 sm:px-8">
+          <img
+            src="http://101.109.250.52/NT-Logo/04_NT-Logo-with-Full-Name.png"
+            alt="Sakai logo"
+            width="100%"
+            height="100"
+            style={{ objectFit: "contain" }}
+          />
+        </div>
         <div
           style={{
             borderRadius: "56px",
@@ -116,7 +113,7 @@ LoginPage.getLayout = function getLayout(page) {
   return (
     <React.Fragment>
       {page}
-      <AppConfig simple />
+      {/* <AppConfig simple /> */}
     </React.Fragment>
   );
 };

@@ -19,7 +19,7 @@ import { classNames } from "primereact/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { ProductService } from "../../demo/service/ProductService";
 import { Demo } from "../../types/types";
-import {  Etaxdocument,SelectedDates } from "../../types/etaxTypes";
+import { Etaxdocument, SelectedDates } from "../../types/etaxTypes";
 import { etaxDocumentMockupData } from "../../types/mockupEtaxData";
 import { Calendar, CalendarChangeEvent } from "primereact/calendar";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -72,7 +72,6 @@ const Crud = () => {
 
   // console.log("date", date, typeof date);
   // console.log('products',products)
-
 
   useEffect(() => {
     // ProductService.getProducts().then((data) => setProducts(data));
@@ -134,7 +133,7 @@ const Crud = () => {
     //   }
 
     //   setProducts(_products);
-      setProductDialog(false);
+    setProductDialog(false);
     //   setProduct(emptyProduct);
     // }
   };
@@ -170,7 +169,6 @@ const Crud = () => {
     //     break;
     //   }
     // }
-
     // return index;
   };
 
@@ -218,7 +216,6 @@ const Crud = () => {
     // const val = (e.target && e.target.value) || "";
     // let _product = { ...product };
     // _product[`${name}`] = val;
-
     // setProduct(_product);
   };
 
@@ -229,7 +226,6 @@ const Crud = () => {
     // const val = e.value || 0;
     // let _product = { ...product };
     // _product[`${name}`] = val;
-
     // setProduct(_product);
   };
 
@@ -366,7 +362,6 @@ const Crud = () => {
     );
   };
 
-
   const codeBodyTemplate = (rowData: Etaxdocument) => {
     return (
       <>
@@ -445,14 +440,15 @@ const Crud = () => {
         <Button
           icon="pi pi-file-pdf"
           rounded
-          severity="warning"
+          severity="info"
+          className="mr-2"
           onClick={() => confirmDeleteProduct(rowData)}
         />
         <Button
           icon="pi pi-envelope"
           rounded
           severity="success"
-          className="mr-2"
+       
           onClick={() => editProduct(rowData)}
         />
       </>
@@ -535,7 +531,7 @@ const Crud = () => {
               <h5>ค้นหาใบเสร็จรับเงิน/ใบกำกับภาษี</h5>
               <form onSubmit={handleSubmit}>
                 <div className="p-fluid formgrid grid">
-                <div className="field col-12 md:col-3  sm:col-6">
+                  <div className="field col-12 md:col-3  sm:col-6">
                     <label htmlFor="tax-invoice">
                       เลขที่ใบเสร็จรับเงิน/ใบกำกับภาษี
                     </label>
@@ -736,9 +732,6 @@ const Crud = () => {
               headerStyle={{ minWidth: "5rem" }}
             ></Column>
 
-
-            
-
             <Column
               body={actionBodyTemplate}
               headerStyle={{ minWidth: "10rem" }}
@@ -810,7 +803,7 @@ const Crud = () => {
                 <small className="p-invalid">Email is required.</small>
               )}
             </div>
-{/*             
+            {/*             
             <div className="field">
               <label htmlFor="description">Description</label>
               <InputTextarea

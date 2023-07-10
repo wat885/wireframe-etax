@@ -60,7 +60,7 @@ const Crud = () => {
   const getDateToState = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Adding 1 since months are zero-based
+    const month = currentDate.getMonth() //+ 1; // Adding 1 since months are zero-based
     const day = currentDate.getDate();
     setDate(new Date(year, month, day));
     setUntilDate(new Date(year, month, day, 23, 59));
